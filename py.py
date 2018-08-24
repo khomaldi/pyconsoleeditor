@@ -109,9 +109,18 @@ def read_new_file(name):
 
 #Перезапись файла
 def write_file(name):
-    file = open(name, 'w', encoding = 'utf-8')
-    text = input('--> ')
-    file.write(text)
+    print('Введите текст. Enter -> переход на новую строку. Ctrl+C -> сохранить файл')
+    text = []
+    while True:
+        try:
+            line = input()
+        except KeyboardInterrupt:
+            break
+        text.append(line)
+
+    file = open(name, 'w', encoding='utf-8')
+    for line in text:
+        file.write(line + '\n')
     file.close()
     clear()
     print('Файл успешно записан! Содержимое файла ', name)
@@ -119,12 +128,21 @@ def write_file(name):
 
 #Дописывание файла
 def addwrite_file(name):
-    file = open(name, 'a', encoding = 'utf-8')
-    text = input('--> ')
-    file.write(text)
-    print('Файл успешно записан! Подождите...')
-    time.sleep(2)
+    print('Введите текст. Enter -> переход на новую строку. Ctrl+C -> сохранить файл')
+    text = []
+    while True:
+        try:
+            line = input()
+        except KeyboardInterrupt:
+            break
+        text.append(line)
+
+    file = open(name, 'a', encoding='utf-8')
+    for line in text:
+        file.write(line + '\n')
+    file.close()
     clear()
+    print('Файл успешно записан! Содержимое файла ', name)
     read_new_file(name)
 
 #Удалить папку
