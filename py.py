@@ -29,15 +29,15 @@ def menu_programm():
 def menu_folder():
     answer = input(
         'Выберите действие:\n1.Показать содержимое\n2.Создать файл\n3.Создать папку\n4.Выбрать файл\n5.Выбрать папку\n6.Завершение программы')
-    if answer == 1:
+    if answer == '1':
         get_files()
-    if answer == 2:
+    if answer == '2':
         create_file()
-    if answer == 3:
+    if answer == '3':
         create_folder()
-    if answer == 4:
+    if answer == '4':
         choose_file()
-    if answer == 5:
+    if answer == '5':
         choose_folder()
 
 #Меню файла
@@ -65,10 +65,10 @@ def get_files():
 #Создать файл
 def create_file():
     name = input('Введите название файла: ')
-    file = open(name, 'tw', encoding='utf-8')
+    file = open(name, 'tw', encoding = 'utf-8')
     file.close()
-    print('Файл успешно создан! Подождите... \n')
-    time.sleep(2)
+    print('Файл успешно создан!\n')
+    print()
     menu_programm()
 
 #Создать новую папку
@@ -78,42 +78,54 @@ def create_folder(foldersName):
 #Выбрать файл
 def choose_file():
     name = input('Введите имя файла: ')
-    menu_file(name)
     clear()
+    menu_file(name)
 
+#Выбрать папку
 def choose_folder():
     name = input('Введите имя папкпи: ')
-    menu_folder()
+    os.chdir(name)
     clear()
+    menu_folder()
 
 #Чтение файла
 def read_file():
     name = input('Введите имя файла: ')
-    file = open(name, 'r')
+    file = open(name, 'r', encoding = 'utf-8')
     for line in file:
         print(line, end = '')
-        file.close()
+
+    file.close()
 
 #Чтение только что созданного файла
 def read_new_file(name):
-    file = open(name, 'r')
+    file = open(name, 'r', encoding='utf-8')
+    i = 1
     for line in file:
-        print(line, end = '')
-        file.close()
+        print(i, ' ', line, end = '')
+        i += 1
+
+    file.close()
 
 #Перезапись файла
 def write_file(name):
-    file = open(name, 'w')
+    file = open(name, 'w', encoding = 'utf-8')
+    text = input('--> ')
+    file.write(text)
+    file.close()
+    clear()
+    print('Файл успешно записан! Содержимое файла ', name)
+    read_new_file(name)
+
+#Дописывание файла
+def addwrite_file(name):
+    file = open(name, 'a', encoding = 'utf-8')
     text = input('--> ')
     file.write(text)
     print('Файл успешно записан! Подождите...')
     time.sleep(2)
     clear()
     read_new_file(name)
-
-#Дописывание файла
-def addwrite_file(name):
-    file = open(name, 'a')
 
 #Удалить папку
 def delete_folder(foldersName):
