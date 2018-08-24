@@ -72,8 +72,11 @@ def create_file():
     menu_programm()
 
 #Создать новую папку
-def create_folder(foldersName):
-    os.mkdir(foldersName)
+def create_folder():
+    name = input('Введиет название папки: ')
+    os.mkdir(name)
+    clear()
+    menu_programm()
 
 #Выбрать файл
 def choose_file():
