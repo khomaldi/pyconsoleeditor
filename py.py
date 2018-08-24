@@ -5,7 +5,7 @@ import time
 
 #Меню программы
 def menu_programm():
-    print('Выберите действие:\n1.Показать содержимое\n2.Создать файл\n3.Создать папку\n4.Выбрать файл\n5.Выбрать папку\n6.Завершение программы\n')
+    print('Выберите действие:\n1.Показать содержимое\n2.Создать файл\n3.Создать папку\n4.Выбрать файл\n5.Выбрать папку\n6.Удалить файл\n7.Удалить папку\n8.Завершение программы\n')
     answer = input('-->')
     if answer == '1':
         get_files()
@@ -18,6 +18,10 @@ def menu_programm():
     elif answer == '5':
         choose_folder()
     elif answer == '6':
+        delete_file()
+    elif answer == '7':
+        delete_folder()
+    elif answer == '8':
         exit()
     else:
         print('Неизвестная команда. Подождите...')
@@ -27,18 +31,29 @@ def menu_programm():
 
 #Меню папки
 def menu_folder():
-    answer = input(
-        'Выберите действие:\n1.Показать содержимое\n2.Создать файл\n3.Создать папку\n4.Выбрать файл\n5.Выбрать папку\n6.Завершение программы')
+    print('Выберите действие:\n1.Показать содержимое\n2.Создать файл\n3.Создать папку\n4.Выбрать файл\n5.Выбрать папку\n6.Удалить файл\n7.Удалить папку\n8.Завершение программы')
+    answer = input('-->')
     if answer == '1':
         get_files()
-    if answer == '2':
+    elif answer == '2':
         create_file()
-    if answer == '3':
+    elif answer == '3':
         create_folder()
-    if answer == '4':
+    elif answer == '4':
         choose_file()
-    if answer == '5':
+    elif answer == '5':
         choose_folder()
+    elif answer == '6':
+        delete_file()
+    elif answer == '7':
+        delete_folder()
+    elif answer == '8':
+        exit()
+    else:
+        print('Неизвестная команда. Подождите...')
+        time.sleep(2)
+        clear()
+        menu_programm()
 
 #Меню файла
 def menu_file(name):
@@ -100,6 +115,9 @@ def read_file(name):
         i += 1
 
     file.close()
+    print()
+    menu_file(name)
+
 
 #Чтение только что созданного файла
 def read_new_file(name):
@@ -149,13 +167,25 @@ def addwrite_file(name):
     print('Файл успешно записан! Содержимое файла ', name)
     read_new_file(name)
 
+#Удалить файл
+def delete_file():
+    name = input('Введине имя файла: ')
+    os.remove(name)
+    clear()
+    menu_programm()
+
 #Удалить папку
-def delete_folder(foldersName):
-    os.rmdir(foldersName)
+def delete_folder():
+    name = input('Введите имя папки: ')
+    os.rmdir(name)
+    clear()
+    menu_programm()
 
 #Закрыть файл
 def close_file(name):
     name.close()
+    clear()
+    menu_programm()
 
 #Очистить консоль
 def clear():
