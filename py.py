@@ -89,11 +89,12 @@ def choose_folder():
     menu_folder()
 
 #Чтение файла
-def read_file():
-    name = input('Введите имя файла: ')
-    file = open(name, 'r', encoding = 'utf-8')
+def read_file(name):
+    file = open(name, 'r', encoding='utf-8')
+    i = 1
     for line in file:
-        print(line, end = '')
+        print(i, ' ', line, end='')
+        i += 1
 
     file.close()
 
