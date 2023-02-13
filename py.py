@@ -99,7 +99,7 @@ def menu_folder():
             menu_program()
 
 
-# Меню файла
+# Меню файла.
 def menu_file(name: str) -> None:
     print(CHOOSE_ACTION_FILE)
 
