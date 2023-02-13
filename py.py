@@ -29,7 +29,7 @@ def menu_programm():
         clear()
         menu_programm()
 
-#Меню папки
+# Меню папки
 def menu_folder():
     print('Выберите действие:\n1.Показать содержимое\n2.Создать файл\n3.Создать папку\n4.Выбрать файл\n5.Выбрать папку\n6.Удалить файл\n7.Удалить папку\n8.Завершение программы')
     answer = input('-->')
@@ -55,7 +55,7 @@ def menu_folder():
         clear()
         menu_programm()
 
-#Меню файла
+# Меню файла
 def menu_file(name):
     print('Выберите действие:\n1.Чтение\n2.Запись\n3.Перезапись\n4.Закрыть файл')
     answer = input('-->')
@@ -68,45 +68,51 @@ def menu_file(name):
     if answer == '4':
         close_file(name)
 
-#Вывести на экран содержимое папки
+
+# Вывести на экран содержимое папки
 def get_files():
     currentDirectory = pathlib.Path('.')
     for currentFile in currentDirectory.iterdir():
         print(currentFile)
 
     print()
-    menu_programm()
+    menu_program()
 
-#Создать файл
+
+# Создать файл
 def create_file():
     name = input('Введите название файла: ')
     file = open(name, 'tw', encoding = 'utf-8')
     file.close()
     print('Файл успешно создан!\n')
     print()
-    menu_programm()
+    menu_program()
 
-#Создать новую папку
+
+# Создать новую папку
 def create_folder():
     name = input('Введиет название папки: ')
     os.mkdir(name)
     clear()
-    menu_programm()
+    menu_program()
 
-#Выбрать файл
+
+# Выбрать файл
 def choose_file():
     name = input('Введите имя файла: ')
     clear()
     menu_file(name)
 
-#Выбрать папку
+
+# Выбрать папку
 def choose_folder():
     name = input('Введите имя папкпи: ')
     os.chdir(name)
     clear()
     menu_folder()
 
-#Чтение файла
+
+# Чтение файла
 def read_file(name):
     file = open(name, 'r', encoding='utf-8')
     i = 1
@@ -119,7 +125,7 @@ def read_file(name):
     menu_file(name)
 
 
-#Чтение только что созданного файла
+# Чтение только что созданного файла
 def read_new_file(name):
     file = open(name, 'r', encoding='utf-8')
     i = 1
@@ -129,7 +135,8 @@ def read_new_file(name):
 
     file.close()
 
-#Перезапись файла
+
+# Перезапись файла
 def write_file(name):
     print('Введите текст. Enter -> переход на новую строку. Ctrl+C -> сохранить файл')
     text = []
@@ -148,7 +155,8 @@ def write_file(name):
     print('Файл успешно записан! Содержимое файла ', name)
     read_new_file(name)
 
-#Дописывание файла
+
+# Дописывание файла
 def addwrite_file(name):
     print('Введите текст. Enter -> переход на новую строку. Ctrl+C -> сохранить файл')
     text = []
@@ -167,32 +175,37 @@ def addwrite_file(name):
     print('Файл успешно записан! Содержимое файла ', name)
     read_new_file(name)
 
-#Удалить файл
+
+# Удалить файл
 def delete_file():
     name = input('Введине имя файла: ')
     os.remove(name)
     clear()
-    menu_programm()
+    menu_program()
 
-#Удалить папку
+
+# Удалить папку
 def delete_folder():
     name = input('Введите имя папки: ')
     os.rmdir(name)
     clear()
-    menu_programm()
+    menu_program()
 
-#Закрыть файл
+
+# Закрыть файл
 def close_file(name):
     name.close()
     clear()
-    menu_programm()
+    menu_program()
 
-#Очистить консоль
+
+# Очистить консоль
 def clear():
     os.system('cls')
 
+
 username = input('Введите ваше имя: ')
 print('Добро пожаловать, ', username)
-menu_programm()
+menu_program()
 
 
