@@ -4,29 +4,6 @@ from os import name as osname
 import time
 
 
-#Меню программы
-def menu_programm():
-    if answer == '1':
-        get_files()
-    elif answer == '2':
-        create_file()
-    elif answer == '3':
-        create_folder()
-    elif answer == '4':
-        choose_file()
-    elif answer == '5':
-        choose_folder()
-    elif answer == '6':
-        delete_file()
-    elif answer == '7':
-        delete_folder()
-    elif answer == '8':
-        exit()
-    else:
-        print('Неизвестная команда. Подождите...')
-        time.sleep(2)
-        clear()
-        menu_programm()
 DEF_IN_TEXT_MESSAGE = "Введите текст. Enter - переход на новую строку. Ctrl+C - сохранить файл."
 
 CHOOSE_ACTION = '''
@@ -95,30 +72,32 @@ def menu_program():
 
 # Меню папки
 def menu_folder():
-    if answer == '1':
-        get_files()
-    elif answer == '2':
-        create_file()
-    elif answer == '3':
-        create_folder()
-    elif answer == '4':
-        choose_file()
-    elif answer == '5':
-        choose_folder()
-    elif answer == '6':
-        delete_file()
-    elif answer == '7':
-        delete_folder()
-    elif answer == '8':
-        exit()
-    else:
-        print('Неизвестная команда. Подождите...')
-        time.sleep(2)
-        clear()
-        menu_programm()
     print(CHOOSE_ACTION_FOLDER)
 
     answer = input('> ')
+    match answer:
+        case '1':
+            get_files()
+        case '2':
+            create_file()
+        case '3':
+            create_folder()
+        case '4':
+            choose_file()
+        case '5':
+            choose_folder()
+        case '6':
+            delete_file()
+        case '7':
+            delete_folder()
+        case '8':
+            exit()
+        case _:
+            print('Неизвестная команда. Подождите...')
+            time.sleep(2)
+            clear()
+            menu_program()
+
 
 # Меню файла
 def menu_file(name):
@@ -126,14 +105,17 @@ def menu_file(name):
 
     answer = input('> ')
 
-    if answer == '1':
-        read_file(name)
-    if answer == '2':
-        write_file(name)
-    if answer == '3':
-        addwrite_file(name)
-    if answer == '4':
-        close_file(name)
+    match answer:
+        case '1':
+            read_file(name)
+        case '2':
+            append_to_file(name)
+        case '3':
+            write_file(name)
+        case '4':
+            close_file()
+        case _:
+            menu_file(name)
 
 
 # Вывести на экран содержимое папки
