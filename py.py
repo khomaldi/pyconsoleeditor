@@ -27,6 +27,8 @@ def menu_programm():
         time.sleep(2)
         clear()
         menu_programm()
+DEF_IN_TEXT_MESSAGE = "Введите текст. Enter - переход на новую строку. Ctrl+C - сохранить файл."
+
 CHOOSE_ACTION = '''
 Выберите действие:
 1. Показать содержимое
@@ -203,7 +205,7 @@ def read_new_file(name):
 
 # Перезапись файла
 def write_file(name):
-    print('Введите текст. Enter -> переход на новую строку. Ctrl+C -> сохранить файл')
+    print(DEF_IN_TEXT_MESSAGE)
     text = []
     while True:
         try:
@@ -222,8 +224,8 @@ def write_file(name):
 
 
 # Дописывание файла
-    print('Введите текст. Enter -> переход на новую строку. Ctrl+C -> сохранить файл')
 def append_to_file(name):
+    print(DEF_IN_TEXT_MESSAGE)
     text = []
     while True:
         try:
