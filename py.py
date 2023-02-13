@@ -222,8 +222,8 @@ def write_file(name):
 
 
 # Дописывание файла
-def addwrite_file(name):
     print('Введите текст. Enter -> переход на новую строку. Ctrl+C -> сохранить файл')
+def append_to_file(name):
     text = []
     while True:
         try:
