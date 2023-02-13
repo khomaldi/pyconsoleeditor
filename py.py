@@ -5,8 +5,6 @@ import time
 
 #Меню программы
 def menu_programm():
-    print('Выберите действие:\n1.Показать содержимое\n2.Создать файл\n3.Создать папку\n4.Выбрать файл\n5.Выбрать папку\n6.Удалить файл\n7.Удалить папку\n8.Завершение программы\n')
-    answer = input('-->')
     if answer == '1':
         get_files()
     elif answer == '2':
@@ -28,11 +26,72 @@ def menu_programm():
         time.sleep(2)
         clear()
         menu_programm()
+CHOOSE_ACTION = '''
+Выберите действие:
+1.Показать содержимое
+2.Создать файл
+3.Создать папку
+4.Выбрать файл
+5.Выбрать папку
+6.Удалить файл
+7.Удалить папку
+8.Завершение программы
+'''
+
+CHOOSE_ACTION_FOLDER = '''
+Выберите действие:
+1.Показать содержимое
+2.Создать файл
+3.Создать папку
+4.Выбрать файл
+5.Выбрать папку
+6.Удалить файл
+7.Удалить папку
+8.Завершение программы'
+'''
+
+
+CHOOSE_ACTION_FILE = '''
+Выберите действие:
+1.Чтение
+2.Запись
+3.Перезапись
+4.Закрыть файл
+'''
+
+
+# Меню программы
+def menu_program():
+    print(CHOOSE_ACTION)
+
+    answer = input('> ')
+
+    match answer:
+        case '1':
+            get_files()
+        case '2':
+            create_file()
+        case '3':
+            create_folder()
+        case '4':
+            choose_file()
+        case '5':
+            choose_folder()
+        case '6':
+            delete_file()
+        case '7':
+            delete_folder()
+        case '8':
+            exit()
+        case _:
+            print('Неизвестная команда. Подождите...')
+            time.sleep(2)
+            clear()
+            menu_program()
+
 
 # Меню папки
 def menu_folder():
-    print('Выберите действие:\n1.Показать содержимое\n2.Создать файл\n3.Создать папку\n4.Выбрать файл\n5.Выбрать папку\n6.Удалить файл\n7.Удалить папку\n8.Завершение программы')
-    answer = input('-->')
     if answer == '1':
         get_files()
     elif answer == '2':
@@ -54,11 +113,16 @@ def menu_folder():
         time.sleep(2)
         clear()
         menu_programm()
+    print(CHOOSE_ACTION_FOLDER)
+
+    answer = input('> ')
 
 # Меню файла
 def menu_file(name):
-    print('Выберите действие:\n1.Чтение\n2.Запись\n3.Перезапись\n4.Закрыть файл')
-    answer = input('-->')
+    print(CHOOSE_ACTION_FILE)
+
+    answer = input('> ')
+
     if answer == '1':
         read_file(name)
     if answer == '2':
