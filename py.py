@@ -266,11 +266,6 @@ def close_file(name):
 
 # Очистить консоль
 def clear():
-
-
-username = input('Введите ваше имя: ')
-print('Добро пожаловать, ', username)
-menu_program()
     # clear last STDOUT Windows
     if osname == "nt":
         os.system('cls')
@@ -279,3 +274,7 @@ menu_program()
         os.system('clear')
 
 
+if __name__ == '__main__':
+    username = input('Введите ваше имя: ')
+    print('Добро пожаловать, ', username)
+    menu_program()
