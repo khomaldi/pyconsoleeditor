@@ -149,7 +149,7 @@ def get_files():
 # Создать файл
 def create_file():
     name = input('Введите название файла: ')
-    file = open(name, 'tw', encoding = 'utf-8')
+    file = open(name, 'tw', encoding='utf-8')
     file.close()
     print('Файл успешно создан!\n')
     print()
@@ -158,7 +158,7 @@ def create_file():
 
 # Создать новую папку
 def create_folder():
-    name = input('Введиет название папки: ')
+    name = input('Введите название папки: ')
     os.mkdir(name)
     clear()
     menu_program()
@@ -166,14 +166,14 @@ def create_folder():
 
 # Выбрать файл
 def choose_file():
-    name = input('Введите имя файла: ')
+    name = str(input('Введите имя файла: '))
     clear()
     menu_file(name)
 
 
 # Выбрать папку
 def choose_folder():
-    name = input('Введите имя папкпи: ')
+    name = input('Введите имя папки: ')
     os.chdir(name)
     clear()
     menu_folder()
@@ -197,7 +197,7 @@ def read_new_file(name):
     file = open(name, 'r', encoding='utf-8')
     i = 1
     for line in file:
-        print(i, ' ', line, end = '')
+        print(i, ' ', line, end='')
         i += 1
 
     file.close()
