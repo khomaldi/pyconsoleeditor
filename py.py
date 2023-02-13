@@ -258,8 +258,7 @@ def delete_folder():
 
 
 # Закрыть файл
-def close_file(name):
-    name.close()
+def close_file():
     clear()
     menu_program()
 
