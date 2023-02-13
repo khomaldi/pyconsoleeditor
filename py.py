@@ -1,5 +1,6 @@
 import pathlib
 import os
+from os import name as osname
 import time
 
 
@@ -265,11 +266,16 @@ def close_file(name):
 
 # Очистить консоль
 def clear():
-    os.system('cls')
 
 
 username = input('Введите ваше имя: ')
 print('Добро пожаловать, ', username)
 menu_program()
+    # clear last STDOUT Windows
+    if osname == "nt":
+        os.system('cls')
+    # linux or MacOS
+    else:
+        os.system('clear')
 
 
