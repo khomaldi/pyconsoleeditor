@@ -205,6 +205,7 @@ def read_new_file(name):
 
 # Перезапись файла
 def write_file(name):
+    clear()
     print(DEF_IN_TEXT_MESSAGE)
     text = []
     while True:
@@ -225,6 +226,7 @@ def write_file(name):
 
 # Дописывание файла
 def append_to_file(name):
+    clear()
     print(DEF_IN_TEXT_MESSAGE)
     text = []
     while True:
