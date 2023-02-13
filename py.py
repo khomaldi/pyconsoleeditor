@@ -100,7 +100,7 @@ def menu_folder():
 
 
 # Меню файла
-def menu_file(name):
+def menu_file(name: str) -> None:
     print(CHOOSE_ACTION_FILE)
 
     answer = input('> ')
