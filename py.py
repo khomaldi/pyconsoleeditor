@@ -2,7 +2,10 @@ import pathlib
 import os
 from os import name as osname
 import time
+from git import Repo
 
+
+GIT_DIR = 'pce_git_client'
 
 DEF_IN_TEXT_MESSAGE = "Введите текст. Enter - переход на новую строку. Ctrl+C - сохранить файл."
 
@@ -120,7 +123,8 @@ def menu_file(name: str) -> None:
 
 # Вывести на экран содержимое папки
 def get_files():
-    currentDirectory = pathlib.Path('.')
+    path = f'./{GIT_DIR}'
+    currentDirectory = pathlib.Path(path)
     for currentFile in currentDirectory.iterdir():
         print(currentFile)
 
@@ -131,8 +135,12 @@ def get_files():
 # Создать файл
 def create_file():
     name = input('Введите название файла: ')
-    file = open(name, 'tw', encoding='utf-8')
+
+    path = f'./{GIT_DIR}/{name}'
+
+    file = open(path, 'tw', encoding='utf-8')
     file.close()
+    git_commit(name, 'Create')
     print('Файл успешно создан!\n')
     print()
     menu_program()
@@ -141,7 +149,8 @@ def create_file():
 # Создать новую папку
 def create_folder():
     name = input('Введите название папки: ')
-    os.mkdir(name)
+    path = f'./{GIT_DIR}/{name}'
+    os.mkdir(path)
     clear()
     menu_program()
 
@@ -156,14 +165,17 @@ def choose_file():
 # Выбрать папку
 def choose_folder():
     name = input('Введите имя папки: ')
-    os.chdir(name)
+    path = f'./{GIT_DIR}/{name}'
+    os.chdir(path)
     clear()
     menu_folder()
 
 
 # Чтение файла
 def read_file(name):
-    file = open(name, 'r', encoding='utf-8')
+    path = f'./{GIT_DIR}/{name}'
+
+    file = open(path, 'r', encoding='utf-8')
     i = 1
     for line in file:
         print(i, ' ', line, end='')
@@ -176,7 +188,9 @@ def read_file(name):
 
 # Чтение только что созданного файла
 def read_new_file(name):
-    file = open(name, 'r', encoding='utf-8')
+    path = f'./{GIT_DIR}/{name}'
+
+    file = open(path, 'r', encoding='utf-8')
     i = 1
     for line in file:
         print(i, ' ', line, end='')
@@ -197,10 +211,13 @@ def write_file(name):
             break
         text.append(line)
 
-    file = open(name, 'w', encoding='utf-8')
+    path = f'./{GIT_DIR}/{name}'
+
+    file = open(path, 'w', encoding='utf-8')
     for line in text:
         file.write(line + '\n')
     file.close()
+    git_commit(name, 'Write into')
     clear()
     print('Файл успешно записан! Содержимое файла ', name)
     read_new_file(name)
@@ -218,10 +235,13 @@ def append_to_file(name):
             break
         text.append(line)
 
-    file = open(name, 'a', encoding='utf-8')
+    path = f'./{GIT_DIR}/{name}'
+
+    file = open(path, 'a', encoding='utf-8')
     for line in text:
         file.write(line + '\n')
     file.close()
+    git_commit(name, 'Append into')
     clear()
     print('Файл успешно записан! Содержимое файла ', name)
     read_new_file(name)
@@ -257,6 +277,25 @@ def clear():
     # linux or MacOS
     else:
         os.system('clear')
+
+
+def git_commit(name: str, info: str):
+    root = f'./{GIT_DIR}/'
+
+    if not os.path.exists(root[:-1]):
+        os.mkdir(f'./{GIT_DIR}')
+        Repo.init(path=root)
+    elif not os.path.exists(f'{root}.git'):
+        Repo.init(path=root)
+
+    repo = Repo(root)
+
+    repo.index.add(items=[name])
+    repo.index.commit(f'{info} {name}')
+
+    repo.close()
+
+    return None
 
 
 if __name__ == '__main__':
